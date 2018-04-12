@@ -1,0 +1,69 @@
+// Hardy Framework by Dave Williams
+
+// Reset.css by Eric Meyers: https://meyerweb.com/eric/tools/css/reset/
+@import 'reset';
+
+// Mixins
+
+// (Gutter + Column) * Number of Columns must equal Context.
+$gutter: 20px;
+$column: 75px;
+$number-of-cols: 12;
+$context: 1140px;
+
+// Mixin used to build columns
+@mixin col-width($amount) {
+  $element-size: ($column * $amount) + ($amount * $gutter);
+  $responsive-size: ($element-size / $context) * 100%;
+  width: $responsive-size;
+}
+
+// Mixin used to set offsets
+@mixin offset-width($amount) {
+  $element-size: ($column * $amount) + ($amount * $gutter);
+  $responsive-size: ($element-size / $context) * 100%;
+  margin-left: $responsive-size;
+}
+
+// Use Border Box for everything
+*, *:after, *:before { box-sizing: border-box;}
+
+// Main
+
+.container {
+  width: 100%;
+  max-width: $context;
+  margin: 0 auto;
+}
+
+.row {
+  display: block;
+  max-width: 100%;
+}
+
+[class*='col-'] {
+  width: 100%;
+  min-height: 1px;
+}
+
+@media only screen and (min-width: 768px) {
+  .row {
+    display: flex;
+    flex-flow: wrap;
+  }
+
+  // Loop used to build columns
+  @for $i from 1 through $number-of-cols {
+    .col-#{$i} {
+      padding: 0 $gutter/2;
+      @include col-width($i);
+    }
+  }
+
+  // Loop used to add offsets
+  @for $i from 1 through $number-of-cols {
+    .offset-#{$i} {
+      @include offset-width($i);
+    }
+  }
+}
