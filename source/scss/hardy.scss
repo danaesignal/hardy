@@ -1,16 +1,18 @@
 // Hardy Framework by Dave Williams
-
 // Reset.css by Eric Meyers: https://meyerweb.com/eric/tools/css/reset/
 @import 'reset';
 
-// Mixins
+// Font, typeface, and typographical styling
+@import 'typography';
 
+// Variables
 // (Gutter + Column) * Number of Columns must equal Context.
 $gutter: 20px;
 $column: 75px;
 $number-of-cols: 12;
 $context: 1140px;
 
+// Mixins
 // Mixin used to build columns
 @mixin col-width($amount) {
   $element-size: ($column * $amount) + ($amount * $gutter);
@@ -52,7 +54,7 @@ $context: 1140px;
 }
 
 @media only screen and (min-width: 768px) {
-  // Collapse padding for nested columns
+  // Collapse padding for columns in nested rows
   .collapse {
     padding: 0;
   }
